@@ -1,12 +1,8 @@
-const fs = require('fs');
-
 class ProductManager {
   constructor(filePath) {
     this.path = filePath;
     this.products = [];
     this.productIdCounter = 1;
-
-    this.loadProductsFromFile();
   }
 
   validate(title, description, price, thumbnail, code, stock) {
@@ -14,7 +10,7 @@ class ProductManager {
       throw new Error("Todos los campos son obligatorios.");
     }
 
-    if (this.products.some(product => product.code === code)) {
+    if (this.products.some((product) => product.code === code)) {
       throw new Error("El código del producto ya está en uso.");
     }
   }
@@ -43,11 +39,18 @@ class ProductManager {
     }
   }
 
+  getProducts() {
+    try {
+      const fileData = fs.readFileSync(this.path, "utf-8");
+      const parsedData = JSON.parse(fileData);
+      return parsedData;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
   async deleteProduct(id) {
     try {
-      const fileData = fs.readFileSync(this.path, 'utf-8');
-      this.products = JSON.parse(fileData) || [];
-
       const index = this.products.findIndex((p) => p.id === id);
 
       if (index === -1) {
@@ -63,10 +66,6 @@ class ProductManager {
     }
   }
 
-  getProducts() {
-    return this.products;
-  }
-
   getProductById(id) {
     const product = this.products.find((p) => p.id === id);
 
@@ -76,31 +75,43 @@ class ProductManager {
 
     return product;
   }
-
-  async writeToFile() {
-    const data = JSON.stringify(this.products, null, 2);
-    await fs.promises.writeFile(this.path, data, 'utf-8');
-  }
-
-  async loadProductsFromFile() {
-    try {
-      const data = await fs.promises.readFile(this.path, 'utf-8');
-      this.products = JSON.parse(data) || [];
-      this.productIdCounter = Math.max(...this.products.map(p => p.id), 0) + 1;
-    } catch (error) {
-      if (error.code === 'ENOENT') {
-        return;
-      }
-      console.error("Error al cargar productos desde el archivo:", error.message);
-    }
-  }
 }
 
-const jsonFilePath = 'productos.json';
+const productManager = new ProductManager("./productos.json");
 
-const productManager = new ProductManager(jsonFilePath);
+// Agregar productos
+// productManager.addProduct({
+//   title: "Notebook Asus 15.6 FHD I3-1115G4 12GB(4+8) 256SSD X515EA FreeDos",
+//   description: "Notebook",
+//   price: 729.990,
+//   thumbnail: "error",
+//   code: "P001",
+//   stock: 15,
+// });
 
-const productIdToDelete = 2;
-productManager.deleteProduct(productIdToDelete);
+// productManager.addProduct({
+//   title: "Notebook Lenovo 14 V14 I3-1005G1 8GB 256SSD FreeDos",
+//   description: "Notebook",
+//   price: 739.990,
+//   thumbnail: "error",
+//   code: "P002",
+//   stock: 30,
+// });
 
-console.log("Todos los productos:", productManager.getProducts());
+// productManager.addProduct({
+//   title: "Notebook HP 15.6 250 G8 I3-1005G1 8GB 256SSD FreeDos",
+//   description: "Notebook",
+//   price: 749.990,
+//   thumbnail: "error",
+//   code: "P003",
+//   stock: 11,
+// });
+
+// productManager.addProduct({
+//   title: "Notebook Asus 15.6 FHD I3-1115G4 12GB(4+8) 256SSD X515EA W11Home",
+//   description: "Notebook",
+//   price: 759.990,
+//   thumbnail: "error",
+//   code: "P004",
+//   stock: 10,
+// });
