@@ -1,4 +1,11 @@
 [
-
-  
+  {
+    "id": "c4fea19c071218ddf383bb42",
+    "title": 2,
+    "description": "product description",
+    "price": 1,
+    "thumbnail": "img",
+    "code": 1,
+    "stock": 1
+  }
 ]
