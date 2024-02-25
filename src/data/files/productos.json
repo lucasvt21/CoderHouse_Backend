@@ -7,5 +7,32 @@
     "thumbnail": "img",
     "code": 1,
     "stock": 1
+  },
+  {
+    "id": "af000e2ef5b62cadcfddc384",
+    "title": "mouse blanco",
+    "description": "mouse blanco",
+    "price": 20,
+    "thumbnail": "img",
+    "code": 12312312,
+    "stock": 30
+  },
+  {
+    "id": "55ad08a9dfc9e4eae06cb521",
+    "title": "mouse blanco",
+    "description": "mouse blanco",
+    "price": 20,
+    "thumbnail": "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_640.png",
+    "code": 12312312,
+    "stock": 30
+  },
+  {
+    "id": "9de285e280a4386aaa2eef2a",
+    "title": "SADSD",
+    "description": "ASDSD",
+    "price": "213123",
+    "thumbnail": "https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_640.png",
+    "code": "21312SADAS",
+    "stock": "21323"
   }
 ]

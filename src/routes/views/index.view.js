@@ -13,9 +13,19 @@ viewsRouter.get("/", async (req, res, next) => {
     }
 })
 
-viewsRouter.get('/register',()=>{ })
-viewsRouter.get('/products',()=>{ })
-viewsRouter.get('/new-product',()=>{})
-viewsRouter.get('/orders',()=>{})
+viewsRouter.get('/register', async( req, res, next) =>{ 
+    try {
+        res.render("register")
+    } catch (error) {
+        next(error)
+    }
+})
+viewsRouter.get('/realTimeProducts',async(req, res, next)=>{
+    try {
+        res.render("realTimeProducts")
+    } catch (error) {
+        next(error)
+    }
+ })
 
 export default viewsRouter
